@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Piece } from './pieces/piece';
+import { PieceFactory } from './pieces/piece-factory';
 import { PieceI } from './pieces/piece-i';
 import { Square } from './square';
 import { Util } from './util';
@@ -21,10 +22,8 @@ export class GameService {
 
   constructor() {
     this.board = GameService.generateBoard();
-    // this.activePiece = Piece.newPiece();
-    this.activePiece = new PieceI();
-    // this.nextPiece = Piece.newPiece();
-    this.nextPiece = Piece.getPiece();
+    this.activePiece = PieceFactory.newPiece();
+    this.nextPiece = PieceFactory.newPiece();
     this.setTicker();
   }
 
@@ -139,7 +138,7 @@ export class GameService {
 
   addNextPiece() {
     this.activePiece = this.nextPiece;
-    this.nextPiece = new PieceI();
+    this.nextPiece = PieceFactory.newPiece();
     this.offsetRow = 0;
     this.offsetColumn = START_COL;
   }
