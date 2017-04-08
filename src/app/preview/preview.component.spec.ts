@@ -1,16 +1,16 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StageComponent } from './stage.component';
+import { PreviewComponent } from './preview.component';
 import { GameService } from '../game.service';
 
-describe('StageComponent', () => {
-  let component: StageComponent;
-  let fixture: ComponentFixture<StageComponent>;
+describe('PreviewComponent', () => {
+  let component: PreviewComponent;
+  let fixture: ComponentFixture<PreviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StageComponent ],
+      declarations: [ PreviewComponent ],
       providers: [ GameService ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
@@ -18,7 +18,7 @@ describe('StageComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StageComponent);
+    fixture = TestBed.createComponent(PreviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

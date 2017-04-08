@@ -1,6 +1,6 @@
 import { Square } from './square';
 
-export const NUMBER_ROWS = 24;
+export const NUMBER_ROWS = 20;
 export const NUMBER_COLS = 12;
 
 export class Board {

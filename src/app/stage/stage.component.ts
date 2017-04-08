@@ -10,8 +10,7 @@ import { Square } from '../square';
 })
 export class StageComponent implements OnInit {
 
-  constructor(private gameService: GameService) {
-  }
+  constructor(private gameService: GameService) { }
 
   getStage() {
     return this.gameService.getStage();
@@ -19,6 +18,8 @@ export class StageComponent implements OnInit {
 
   @HostListener('window:keydown', ['$event'])
   keyboardInput(event: KeyboardEvent) {
+    event.stopPropagation()
+    event.preventDefault();
     switch (event.key) {
       case 'a':
       case 'A':
