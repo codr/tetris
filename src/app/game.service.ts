@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Board, NUMBER_COLS } from './board';
-import { Piece } from './pieces/piece';
-import { PieceFactory } from './pieces/piece-factory';
+import { Piece, PieceFactory } from './pieces';
 import { Square } from './square';
 import { Util } from './util';
 
