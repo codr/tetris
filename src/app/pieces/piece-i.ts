@@ -6,9 +6,9 @@ import { Square } from '../square';
 export class PieceI extends Piece {
   readonly type = PieceType.I;
   color = Color.Cyan;
-  protected layer = [[0, 1, 0, 0],
-                   [0, 1, 0, 0],
-                   [0, 1, 0, 0],
-                   [0, 1, 0, 0]];
+  protected layer = [[0, 1, 0],
+                   [0, 1, 0],
+                   [0, 1, 0],
+                   [0, 1, 0]];
 
 }

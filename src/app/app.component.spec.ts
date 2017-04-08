@@ -1,13 +1,13 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
-    const template = `<div></div>`;
-    TestBed.overrideComponent(AppComponent, {set: {template}});
     TestBed.configureTestingModule({
       declarations: [ AppComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ],
     }).compileComponents();
   }));
 
@@ -23,7 +23,7 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Tetris');
   }));
 
-  xit('should render title in a h1 tag', async(() => {
+  it('should render title in a h1 tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;

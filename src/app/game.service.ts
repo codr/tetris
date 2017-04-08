@@ -7,6 +7,7 @@ import { Util } from './util';
 
 export const NUMBER_ROWS = 24;
 export const NUMBER_COLS = 12;
+const START_COL = ((NUMBER_COLS / 2) - 1) * -1;
 const TICK = 1000;
 
 @Injectable()
@@ -14,7 +15,7 @@ export class GameService {
   board: Array<Array<Square>>
   activePiece: Piece;
   nextPiece: Piece;
-  offsetColumn = 0;
+  offsetColumn = START_COL;
   offsetRow = 0;
   timer: number;
 
@@ -23,7 +24,7 @@ export class GameService {
     // this.activePiece = Piece.newPiece();
     this.activePiece = new PieceI();
     // this.nextPiece = Piece.newPiece();
-    this.nextPiece = new PieceI();
+    this.nextPiece = Piece.getPiece();
     this.setTicker();
   }
 
@@ -48,7 +49,6 @@ export class GameService {
   }
 
   getStage(): Array<Array<Square>> {
-    let pieceRow = 0;
     let piece = this.activePiece.draw();
     let stage = this.board.map((row, y) =>
       row.map((square, x) =>
@@ -99,6 +99,37 @@ export class GameService {
   }
 
   rotate() {
+    const pre = this.countSquares();
+    this.activePiece.rotate();
+    let post = this.countSquares();
+    if (pre === post) {
+      return;
+    }
+    const originalOffset = this.offsetColumn;
+    this.offsetColumn++;
+    post = this.countSquares();
+    if (pre === post) {
+      return;
+    }
+    this.offsetColumn = originalOffset - 1;
+    post = this.countSquares();
+    if (pre === post) {
+      return;
+    }
+    this.offsetColumn = originalOffset + 2;
+    post = this.countSquares();
+    if (pre === post) {
+      return;
+    }
+    this.offsetColumn = originalOffset - 2;
+    post = this.countSquares();
+    if (pre === post) {
+      return;
+    }
+    // Can't make move.
+    this.offsetColumn = originalOffset;
+    this.activePiece.rotate();
+    this.activePiece.rotate();
     this.activePiece.rotate();
   }
 
@@ -110,7 +141,7 @@ export class GameService {
     this.activePiece = this.nextPiece;
     this.nextPiece = new PieceI();
     this.offsetRow = 0;
-    this.offsetColumn = 0;
+    this.offsetColumn = START_COL;
   }
 
 }

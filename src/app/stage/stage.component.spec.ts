@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StageComponent } from './stage.component';
@@ -8,11 +9,11 @@ describe('StageComponent', () => {
   let fixture: ComponentFixture<StageComponent>;
 
   beforeEach(async(() => {
-    const template = `<div></div>`;
-    TestBed.overrideComponent(StageComponent, {set: {template}});
+
     TestBed.configureTestingModule({
       declarations: [ StageComponent ],
       providers: [ GameService ],
+      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();
   }));
