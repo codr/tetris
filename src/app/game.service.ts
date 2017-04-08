@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 
+import { Board, NUMBER_COLS } from './board';
 import { Piece } from './pieces/piece';
 import { PieceFactory } from './pieces/piece-factory';
-import { PieceI } from './pieces/piece-i';
 import { Square } from './square';
 import { Util } from './util';
 
-export const NUMBER_ROWS = 24;
-export const NUMBER_COLS = 12;
 const START_COL = ((NUMBER_COLS / 2) - 1) * -1;
 const TICK = 1000;
 
 @Injectable()
 export class GameService {
-  board: Array<Array<Square>>
+  board: Array<Array<Square>>;
   activePiece: Piece;
   nextPiece: Piece;
   offsetColumn = START_COL;
@@ -21,25 +19,10 @@ export class GameService {
   timer: number;
 
   constructor() {
-    this.board = GameService.generateBoard();
+    this.board = Board.generateBoard();
     this.activePiece = PieceFactory.newPiece();
     this.nextPiece = PieceFactory.newPiece();
     this.setTicker();
-  }
-
-  static generateBoard() {
-    const board = Array(NUMBER_ROWS).fill(null);
-    board.forEach(GameService.generateRow);
-    return board;
-  }
-
-  static generateRow(row, index, rows) {
-    rows[index] = Array(NUMBER_COLS).fill(null);
-    rows[index].forEach(GameService.generateSquare);
-  }
-
-  static generateSquare(square, index, row) {
-    row[index] = new Square();
   }
 
   setTicker() {

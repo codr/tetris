@@ -1,7 +1,6 @@
 import { Color } from '../color.enum';
 import { Piece } from './piece';
 import { PieceType } from './piece-type.enum';
-import { Square } from '../square';
 
 export class PieceI extends Piece {
   readonly type = PieceType.I;

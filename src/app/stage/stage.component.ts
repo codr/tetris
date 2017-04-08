@@ -9,10 +9,8 @@ import { Square } from '../square';
   styleUrls: ['./stage.component.css']
 })
 export class StageComponent implements OnInit {
-  rows: Array<Array<Square>>;
 
   constructor(private gameService: GameService) {
-    this.rows = gameService.getStage();
   }
 
   getStage() {
