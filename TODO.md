@@ -1,15 +1,16 @@
 
 Soon:
-- Run test on Travis CI.
-- Break out board from gameService.
-- End game.
-- Fill a row.
-- Hold down to fall to bottom.
-- Scoring.
+- Run test on Travis CI
+- Break out board from gameService
+- End game
+- Fill a row
+- Hold down to fall to bottom
+- Scoring
 
 Later:
-- firebase
-- multiplayer
+- Make mobile work
+- Firebase
+- Multiplayer
 
 Maybe:
-- programmable player
+- Programmable player
