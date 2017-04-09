@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "6.10"
+script:
+  # run test script
+  - npm run test
+  # run build script specified in package.json
+  - npm run build
+  # call script for deploying of produced artifacts
+  - bash ./.travis-deploy.sh
