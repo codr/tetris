@@ -19,7 +19,7 @@ export class StageComponent implements OnInit {
   @HostListener('window:keydown', ['$event'])
   keyboardInput(event: KeyboardEvent) {
     switch (event.key) {
-      // case 'ArrowLeft':
+      case 'ArrowLeft':
       case 'ArrowUp':
       case 'ArrowDown':
       case 'ArrowRight':
