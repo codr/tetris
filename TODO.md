@@ -1,10 +1,11 @@
 
 Soon:
-- break out board from gameservice.
+- Run test on Travis CI.
+- Break out board from gameService.
 - End game.
 - Fill a row.
 - Hold down to fall to bottom.
-- score.
+- Scoring.
 
 Later:
 - firebase
