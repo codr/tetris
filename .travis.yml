@@ -4,21 +4,17 @@ node_js:
 sudo: required
 
 before_install:
-  # Set no display
+  # set no display
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
-  - export CHROMIUM_VERSION=433059 # Chrome 53 linux stable, see https://www.chromium.org/developers/calendar
-  - export CHROMIUM_DIR=$HOME/.chrome/chromium
-  - export FILE="chrome-linux.zip"
-  - curl "https://storage.googleapis.com/chromium-browser-snapshots/Linux_x64/$CHROMIUM_VERSION/$FILE" -s -w %{http_code} --create-dirs -o $FILE
-  - unzip $FILE -d $CHROMIUM_DIR
-  - rm $FILE
-  - export CHROME_BIN=$HOME/.chrome/chromium/chrome-linux/chrome
-
 script:
+  # install chrome
+  - bash ./.travis-chrome-install.sh
   # run test script
   - npm run test -- --single-run
+
+before_deploy:
   # run build script specified in package.json
   - npm run build -- --prod --base-href /tetris/
 
