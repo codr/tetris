@@ -43,9 +43,6 @@ module.exports = function (config) {
     browserDisconnectTimeout: 180000,
     browserDisconnectTolerance: 3,
     browserNoActivityTimeout: 300000,
-    customLaunchers: {
-      'ChromeNoSandbox': {base: 'Chrome', flags: ['--no-sandbox']},
-    },
     singleRun: false
   });
 };
