@@ -41,7 +41,7 @@ module.exports = function (config) {
     browsers: ['Chrome'],
     customLaunchers: {
       'ChromeNoSandbox': {base: 'Chrome', flags: ['--no-sandbox']},
-    }
+    },
     singleRun: false
   });
 };
