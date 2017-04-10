@@ -10,6 +10,7 @@ before_install:
 
 script:
   # install chrome
+  - export CHROME_BIN=$HOME/.chrome/chromium/chrome-linux/chrome
   - bash ./.travis-chrome-install.sh
   # run test script
   - npm run test -- --single-run
