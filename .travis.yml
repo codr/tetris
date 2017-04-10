@@ -14,7 +14,7 @@ script:
   - bash ./.travis-chrome-install.sh
   # run test script
   # - npm run test -- --single-run --browsers=ChromeNoSandbox
-  - ./node_modules/.bin/karma start ./karma-js.conf.js --single-run --browsers=ChromeNoSandbox
+  - ./node_modules/.bin/karma start ./karma.conf.js --single-run --browsers=ChromeNoSandbox
 
 before_deploy:
   # run build script specified in package.json
