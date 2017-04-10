@@ -9,9 +9,17 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 script:
-  # install chrome
-  - export CHROME_BIN=$HOME/.chrome/chromium/chrome-linux/chrome
-  - bash ./.travis-chrome-install.sh
+  # # install chrome
+  # - export CHROME_BIN=$HOME/.chrome/chromium/chrome-linux/chrome
+  # - bash ./.travis-chrome-install.sh
+
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CHROME_BIN=/usr/bin/google-chrome; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y libappindicator1 fonts-liberation; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo dpkg -i google-chrome*.deb; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo "--no-sandbox" > ~/.config/chrome-flags.conf; fi
+
   # run test script
   - npm run test -- --single-run
 
