@@ -1,7 +1,9 @@
 language: node_js
-sudo: required #required for a newer version of Firefox
 node_js:
   - "6.10"
+
+addons:
+  firefox: latest
 
 before_install:
   # set no display
