@@ -1,0 +1,62 @@
+
+/** Player request game state */
+message StateRequest {}
+
+/** Response with game state */
+message StateResponse {
+  GameState current_player_state = 0;
+}
+
+/** Player performs move */
+message MoveRequest {}
+
+/** Move response */
+message MeoveResponse {}
+
+service TetrisService {
+  rpc getState(StateRequest) returns (StateResponse);
+  rpc move(MoveRequest) returns (MoveResponse);
+}
+
+//##################################################
+
+message GameState {
+  int score = 0;
+  repeated Tile board = 1;
+  ActivePeice active_piece = 2;
+  Shape next_piece = 3;
+}
+
+message Tile {
+  Shape from_shape = 0;
+  Location location = 1;
+  bool falling = 3; // TODO: Is this needed?
+}
+
+message ActivePeice {
+  Shape shape = 0;
+  Location location = 1;
+  Direction direction = 3;
+}
+
+message Location {
+  int x = 0;
+  int y = 1;
+}
+
+enum Shape {
+  O = 0;
+  L = 1;
+  J = 2;
+  I = 3;
+  T = 4;
+  Z = 5;
+  S = 7;
+}
+
+enum Direction {
+  ZERO = 0;
+  NINTY = 1;
+  ONE_EIGHTY = 2;
+  TWO_SEVENTY = 3;
+}
