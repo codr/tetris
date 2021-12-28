@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SquareComponent } from './square.component';
 import { ColorPipe } from '../color.pipe';
@@ -9,7 +9,7 @@ describe('SquareComponent', () => {
   let component: SquareComponent;
   let fixture: ComponentFixture<SquareComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         SquareComponent,
