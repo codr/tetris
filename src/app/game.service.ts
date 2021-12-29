@@ -10,21 +10,18 @@ const TICK = 1000;
 
 @Injectable()
 export class GameService {
-  board: Array<Array<Square>>;
-  activePiece: Piece;
-  nextPiece: Piece;
-  offsetColumn = START_COL;
-  offsetRow = 0;
+  private board = Board.generateBoard();
+  private activePiece = PieceFactory.newPiece();
+  nextPiece = PieceFactory.newPiece();
+  private offsetColumn = START_COL;
+  private offsetRow = 0;
   private timer: ReturnType<typeof setTimeout>;
 
   constructor() {
-    this.board = Board.generateBoard();
-    this.activePiece = PieceFactory.newPiece();
-    this.nextPiece = PieceFactory.newPiece();
     this.setTicker();
   }
 
-  setTicker() {
+  private setTicker() {
     clearTimeout(this.timer);
     this.timer = setTimeout(this.moveDown.bind(this), TICK);
   }
@@ -35,7 +32,7 @@ export class GameService {
       row.map((square, x) =>
         piece[y + this.offsetRow] &&
         piece[y + this.offsetRow][x + this.offsetColumn] &&
-        piece[y + this.offsetRow][x + this.offsetColumn].isOccupied() ?
+        piece[y + this.offsetRow][x + this.offsetColumn].isOccupied ?
             piece[y + this.offsetRow][x + this.offsetColumn] :
             square
       )
@@ -43,9 +40,9 @@ export class GameService {
     return stage;
   }
 
-  countSquares(): number {
+  private countSquares(): number {
     return Util.flatten(this.getStage()).reduce((acc, val) =>
-      acc + (val.isOccupied() ? 1 : 0)
+      acc + (val.isOccupied ? 1 : 0)
     , 0);
   }
 

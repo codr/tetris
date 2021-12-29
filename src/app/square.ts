@@ -1,11 +1,12 @@
-import { Color } from './color.enum';
+import {Color} from './color.enum';
+import { Piece } from './pieces';
 
 export class Square {
+  readonly isOccupied = this.fromPiece !== null;
+  readonly color = this.fromPiece?.color || Color.None;
 
-  constructor(public color = Color.None) {}
-
-  isOccupied(): boolean  {
-    return this.color !== Color.None;
-  }
+  constructor(
+    private readonly fromPiece: Piece|null = null,
+  ) {}
 
 }

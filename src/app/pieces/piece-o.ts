@@ -6,6 +6,6 @@ export class PieceO extends Piece {
   readonly type = PieceType.O;
   color = Color.Yellow;
   protected layer = [[1, 1],
-                   [1, 1]];
+                     [1, 1]];
 
 }

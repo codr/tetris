@@ -4,7 +4,7 @@ import { Square } from '../square';
 import { Util } from '../util';
 
 export abstract class Piece {
-  abstract type: PieceType;
+  abstract readonly type: PieceType;
   abstract color: Color;
   protected abstract layer: Array<Array<number>>;
 
@@ -15,9 +15,9 @@ export abstract class Piece {
   draw(): Array<Array<Square>> {
     return this.layer.map(row =>
       row.map( b =>
-        new Square(b ? this.color : Color.None)
+        new Square(b ? this : null)
       )
-    )
+    );
   }
 
 }
