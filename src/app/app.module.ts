@@ -10,6 +10,7 @@ import { ColorPipe } from './color.pipe';
 
 import { GameService } from './game.service';
 import { PreviewComponent } from './preview/preview.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PreviewComponent } from './preview/preview.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [GameService],
   bootstrap: [AppComponent]
