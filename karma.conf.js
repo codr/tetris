@@ -16,20 +16,11 @@ module.exports = function (config) {
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    files: [
-      
-    ],
-    preprocessors: {
-      
-    },
-    mime: {
-      'text/x-typescript': ['ts','tsx']
-    },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, 'coverage'), reports: [ 'html', 'lcovonly' ],
-      fixWebpackSourcePaths: true
+      dir: require('path').join(__dirname, 'coverage'),
+      reports: [ 'html', 'lcovonly' ],
+      fixWebpackSourcePaths: true,
     },
-    
     reporters: config.angularCli && config.angularCli.codeCoverage
               ? ['progress', 'coverage-istanbul']
               : ['progress', 'kjhtml'],
@@ -37,7 +28,20 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false
+    browsers: ["ChromeHeadlessNoSandbox"],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: "ChromeHeadless",
+        flags: [
+          "--no-sandbox", // required to run without privileges in docker
+          "--user-data-dir=/tmp/chrome-test-profile",
+          "--disable-web-security",
+          "--remote-debugging-port=9222",
+        ],
+        debug: true,
+      },
+    },
+    singleRun: false,
+    restartOnFileChange: true,
   });
 };
