@@ -23,7 +23,7 @@ export class GameService {
 
   private setTicker() {
     clearTimeout(this.timer);
-    this.timer = setTimeout(this.moveDown.bind(this), TICK);
+    this.timer = setTimeout(() => this.moveDown(), TICK);
   }
 
   getStage(): Array<Array<Square>> {
@@ -41,8 +41,8 @@ export class GameService {
   }
 
   private countSquares(): number {
-    return Util.flatten(this.getStage()).reduce((acc, val) =>
-      acc + (val.isOccupied ? 1 : 0)
+    return Util.flatten(this.getStage()).reduce((count, square) =>
+      square.isOccupied ? ++count : count
     , 0);
   }
 
@@ -83,29 +83,7 @@ export class GameService {
     if (pre === post) {
       return;
     }
-    const originalOffset = this.offsetColumn;
-    this.offsetColumn++;
-    post = this.countSquares();
-    if (pre === post) {
-      return;
-    }
-    this.offsetColumn = originalOffset - 1;
-    post = this.countSquares();
-    if (pre === post) {
-      return;
-    }
-    this.offsetColumn = originalOffset + 2;
-    post = this.countSquares();
-    if (pre === post) {
-      return;
-    }
-    this.offsetColumn = originalOffset - 2;
-    post = this.countSquares();
-    if (pre === post) {
-      return;
-    }
     // Can't make move.
-    this.offsetColumn = originalOffset;
     this.activePiece.rotate();
     this.activePiece.rotate();
     this.activePiece.rotate();
