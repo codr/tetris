@@ -15,7 +15,7 @@ export class GameService {
   nextPiece: Piece;
   offsetColumn = START_COL;
   offsetRow = 0;
-  timer: number;
+  private timer: ReturnType<typeof setTimeout>;
 
   constructor() {
     this.board = Board.generateBoard();
