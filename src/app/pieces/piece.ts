@@ -24,4 +24,12 @@ export abstract class Piece {
     return Util.count(this.layer, n => !!n);
   }
 
+  private isOccupiedAt(x: number, y: number): boolean {
+    return this.layer[y] && this.layer[y][x] && !!this.layer[y][x];
+  }
+
+  getSquareAt(x: number, y: number): Square|null {
+    return this.isOccupiedAt(x,y) ? new Square(this) : null;
+  }
+
 }

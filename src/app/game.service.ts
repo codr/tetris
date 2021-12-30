@@ -13,7 +13,7 @@ const TICK = 1000;
 
 @Injectable()
 export class GameService {
-  private board = Board.generateBoard();
+  private board = new Board();
   private activePiece = this.pieceQueue.pop();
   private offsetColumn = START_COL;
   private offsetRow = 0;
@@ -28,7 +28,7 @@ export class GameService {
 
   private startTicker() {
     clearTimeout(this.timer);
-    if (this.activePieceOverlaps()) {
+    if (!this.canPlaceActivePiece()) {
       this.showGameOver();
       return;
     }
@@ -44,47 +44,29 @@ export class GameService {
   }
 
   getStage(): Square[][] {
-    let piece = this.activePiece.draw();
-    let stage = this.board.map((row, y) =>
-      row.map((square, x) =>
-        piece[y + this.offsetRow] &&
-        piece[y + this.offsetRow][x + this.offsetColumn] &&
-        piece[y + this.offsetRow][x + this.offsetColumn].isOccupied ?
-            piece[y + this.offsetRow][x + this.offsetColumn] :
-            square
-      )
-    )
-    return stage;
+    return this.board.draw(this.activePiece, this.offsetColumn, this.offsetRow);
   }
 
-  private countSquares(): number {
-    return Util.count(this.getStage(), s => s.isOccupied);
+  private canPlaveActivePiece(column: number, row: number): boolean {
+    return this.board.canPlace(this.activePiece, column, row);
   }
 
   moveRight() {
-    const pre = this.countSquares();
-    this.offsetColumn--;
-    const post = this.countSquares();
-    if (pre !== post) {
-      this.offsetColumn++;
-    }
-  }
-
-  moveLeft() {
-    const pre = this.countSquares();
-    this.offsetColumn++;
-    const post = this.countSquares();
-    if (pre !== post) {
+    if (this.canPlaveActivePiece(this.offsetColumn-1, this.offsetRow)) {
       this.offsetColumn--;
     }
   }
 
+  moveLeft() {
+    if (this.canPlaveActivePiece(this.offsetColumn+1, this.offsetRow)) {
+      this.offsetColumn++;
+    }
+  }
+
   moveDown() {
-    const pre = this.countSquares();
-    this.offsetRow--;
-    const post = this.countSquares();
-    if (pre !== post) {
-      this.offsetRow++;
+    if (this.canPlaveActivePiece(this.offsetColumn, this.offsetRow-1)){
+      this.offsetRow--;
+    } else {
       this.placePiece();
       this.addNextPiece();
     }
@@ -92,10 +74,8 @@ export class GameService {
   }
 
   rotate() {
-    const pre = this.countSquares();
     this.activePiece.rotate();
-    let post = this.countSquares();
-    if (pre === post) {
+    if (this.board.canPlace(this.activePiece, this.offsetColumn, this.offsetRow)) {
       return;
     }
     // Can't make move.
@@ -105,7 +85,7 @@ export class GameService {
   }
 
   private placePiece() {
-    this.board = this.getStage();
+    this.board.place(this.activePiece, this.offsetColumn, this.offsetRow);
   }
 
   private addNextPiece() {
@@ -114,10 +94,8 @@ export class GameService {
     this.offsetColumn = START_COL;
   }
 
-  private activePieceOverlaps(): boolean {
-    const occupiedOnBoard = Util.count(this.board, s => s.isOccupied);
-    const expected = occupiedOnBoard + this.activePiece.countSquares();
-    return expected !== this.countSquares();
+  private canPlaceActivePiece(): boolean {
+    return this.board.canPlace(this.activePiece, this.offsetColumn, this.offsetRow);
   }
 
 }

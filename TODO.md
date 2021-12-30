@@ -1,7 +1,6 @@
 
 Soon:
 - Run test on Travis CI
-- Break out board from gameService
 - Fill a row
 - Scoring
 
