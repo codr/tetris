@@ -40,7 +40,10 @@ export class GameService {
   }
 
   private showGameOver() {
-    this.dialog.open(GameOverDialogComponent);
+    this.dialog.open(GameOverDialogComponent).afterClosed().subscribe(() => {
+      this.board = new Board();
+      this.startTicker();
+    });
   }
 
   getStage(): Square[][] {
