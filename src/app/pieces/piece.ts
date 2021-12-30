@@ -20,4 +20,8 @@ export abstract class Piece {
     );
   }
 
+  countSquares(): number {
+    return Util.count(this.layer, n => !!n);
+  }
+
 }

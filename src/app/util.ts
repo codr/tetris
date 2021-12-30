@@ -25,4 +25,8 @@ export class Util {
     , []);
   }
 
+  static count<T>(arr: T[], fn: (item: Flattened<T>) => boolean): number {
+    return Util.flatten(arr).reduce((acc, cur) => fn(cur) ? ++acc : acc, 0);
+  }
+
 }

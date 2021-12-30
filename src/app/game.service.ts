@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Board, NUMBER_COLS } from './board';
-import { Piece, PieceFactory } from './pieces';
+import { PieceFactory } from './pieces';
 import { Square } from './square';
 import { Util } from './util';
+
+import {GameOverDialogComponent} from './game-over-dialog/game-over-dialog.component';
 
 const START_COL = ((NUMBER_COLS / 2) - 1) * -1;
 const TICK = 1000;
@@ -17,16 +20,30 @@ export class GameService {
   private offsetRow = 0;
   private timer: ReturnType<typeof setTimeout>;
 
-  constructor() {
-    this.setTicker();
+  constructor(
+    private readonly dialog: MatDialog,
+  ) {
+    this.startTicker();
   }
 
-  private setTicker() {
+  private startTicker() {
     clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.moveDown(), TICK);
+    if (this.activePieceOverlaps()) {
+      this.showGameOver();
+      return;
+    }
+    this.timer = setTimeout(() => this.tick(), TICK);
   }
 
-  getStage(): Array<Array<Square>> {
+  private tick() {
+    this.moveDown();
+  }
+
+  private showGameOver() {
+    this.dialog.open(GameOverDialogComponent);
+  }
+
+  getStage(): Square[][] {
     let piece = this.activePiece.draw();
     let stage = this.board.map((row, y) =>
       row.map((square, x) =>
@@ -41,9 +58,7 @@ export class GameService {
   }
 
   private countSquares(): number {
-    return Util.flatten(this.getStage()).reduce((count, square) =>
-      square.isOccupied ? ++count : count
-    , 0);
+    return Util.count(this.getStage(), s => s.isOccupied);
   }
 
   moveRight() {
@@ -73,7 +88,7 @@ export class GameService {
       this.placePiece();
       this.addNextPiece();
     }
-    this.setTicker();
+    this.startTicker();
   }
 
   rotate() {
@@ -89,15 +104,21 @@ export class GameService {
     this.activePiece.rotate();
   }
 
-  placePiece() {
+  private placePiece() {
     this.board = this.getStage();
   }
 
-  addNextPiece() {
+  private addNextPiece() {
     this.activePiece = this.nextPiece;
     this.nextPiece = PieceFactory.newPiece();
     this.offsetRow = 0;
     this.offsetColumn = START_COL;
+  }
+
+  private activePieceOverlaps(): boolean {
+    const occupiedOnBoard = Util.count(this.board, s => s.isOccupied);
+    const expected = occupiedOnBoard + this.activePiece.countSquares();
+    return expected !== this.countSquares();
   }
 
 }
