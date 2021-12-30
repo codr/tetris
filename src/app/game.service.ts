@@ -13,7 +13,7 @@ const TICK = 1000;
 
 @Injectable()
 export class GameService {
-  private board = new Board();
+  private board: Board;
   private activePiece = this.pieceQueue.pop();
   private offsetColumn = START_COL;
   private offsetRow = 0;
@@ -23,10 +23,15 @@ export class GameService {
     private readonly dialog: MatDialog,
     private readonly pieceQueue: PieceQueueService,
   ) {
-    this.startTicker();
+    this.startNewGame();
   }
 
-  private startTicker() {
+  startNewGame() {
+    this.board = new Board();
+    this.waitThenTick();
+  }
+
+  private waitThenTick() {
     clearTimeout(this.timer);
     if (!this.canPlaceActivePiece()) {
       this.showGameOver();
@@ -41,8 +46,7 @@ export class GameService {
 
   private showGameOver() {
     this.dialog.open(GameOverDialogComponent).afterClosed().subscribe(() => {
-      this.board = new Board();
-      this.startTicker();
+      this.startNewGame();
     });
   }
 
@@ -73,7 +77,7 @@ export class GameService {
       this.placePiece();
       this.addNextPiece();
     }
-    this.startTicker();
+    this.waitThenTick();
   }
 
   rotate() {
