@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { GameService } from '../game.service';
+import {PieceQueueService} from 'app/piece-queue.service';
 
 @Component({
   selector: 'preview',
@@ -9,10 +8,12 @@ import { GameService } from '../game.service';
 })
 export class PreviewComponent implements OnInit {
 
-  constructor(private gameService: GameService) { }
+  constructor(
+    private readonly pieceQueue: PieceQueueService,
+    ) { }
 
   getPiece() {
-    return this.gameService.nextPiece.draw();
+    return this.pieceQueue.peek().draw();
   }
 
   ngOnInit() {

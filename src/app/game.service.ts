@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Board, NUMBER_COLS } from './board';
-import { PieceFactory } from './pieces';
 import { Square } from './square';
 import { Util } from './util';
 
 import {GameOverDialogComponent} from './game-over-dialog/game-over-dialog.component';
+import {PieceQueueService} from './piece-queue.service';
 
 const START_COL = ((NUMBER_COLS / 2) - 1) * -1;
 const TICK = 1000;
@@ -14,14 +14,14 @@ const TICK = 1000;
 @Injectable()
 export class GameService {
   private board = Board.generateBoard();
-  private activePiece = PieceFactory.newPiece();
-  nextPiece = PieceFactory.newPiece();
+  private activePiece = this.pieceQueue.pop();
   private offsetColumn = START_COL;
   private offsetRow = 0;
   private timer: ReturnType<typeof setTimeout>;
 
   constructor(
     private readonly dialog: MatDialog,
+    private readonly pieceQueue: PieceQueueService,
   ) {
     this.startTicker();
   }
@@ -109,8 +109,7 @@ export class GameService {
   }
 
   private addNextPiece() {
-    this.activePiece = this.nextPiece;
-    this.nextPiece = PieceFactory.newPiece();
+    this.activePiece = this.pieceQueue.pop();
     this.offsetRow = 0;
     this.offsetColumn = START_COL;
   }
