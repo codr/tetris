@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/codr/tetris.svg?branch=master)](https://travis-ci.org/codr/tetris)
 
+[Demo](https://codr.github.io/tetris)
+
 # Tetris
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
@@ -14,7 +16,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--configuration production` flag for a production build.
 
 ## Running unit tests
 
@@ -24,6 +26,10 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
+
+## Deploy
+
+Run `ng deploy` to deploy to gh-pages at https://codr.github.io/tetris.
 
 ## Further help
 
