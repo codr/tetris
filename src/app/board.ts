@@ -1,5 +1,5 @@
 import {Piece} from './pieces';
-import { Square } from './square';
+import {Square} from './square';
 import {Util} from './util';
 
 export const NUMBER_ROWS = 20;
@@ -28,6 +28,17 @@ export class Board {
     return expected === Util.count(this.overlay(piece, offsetColumn, offsetRow), s => s.isOccupied);
   }
 
+  removeCompleteRows() {
+    const remainingRows = this.squares.filter(row => {
+      return !row.every((s => s.isOccupied));
+    });
+    const numberOfRemovedRows = this.squares.length - remainingRows.length;
+    if (numberOfRemovedRows) {
+      remainingRows.unshift(...Board.generateBoard(numberOfRemovedRows));
+      this.squares = remainingRows;
+    }
+  }
+
   private overlay(piece: Piece, offsetColumn: number, offsetRow: number): Square[][] {
     return this.squares.map((row, y) =>
       row.map((square, x) =>
@@ -36,8 +47,8 @@ export class Board {
     );
   }
 
-  private static generateBoard() {
-    return Array.from({length: NUMBER_ROWS}, Board.generateRow)
+  private static generateBoard(numberOfRows = NUMBER_ROWS) {
+    return Array.from({length: numberOfRows}, Board.generateRow)
   }
 
   private static generateRow() {

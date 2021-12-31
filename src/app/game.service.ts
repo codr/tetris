@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Board, NUMBER_COLS } from './board';
 import { Square } from './square';
-import { Util } from './util';
 
 import {GameOverDialogComponent} from './game-over-dialog/game-over-dialog.component';
 import {PieceQueueService} from './piece-queue.service';
@@ -93,6 +92,7 @@ export class GameService {
 
   private placePiece() {
     this.board.place(this.activePiece, this.offsetColumn, this.offsetRow);
+    this.board.removeCompleteRows();
   }
 
   private addNextPiece() {
