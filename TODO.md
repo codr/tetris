@@ -1,9 +1,8 @@
 
 Soon:
-- Run test on Travis CI
-- Fill a row
+- Move CI/CD from travisCI to github actions
 - Scoring
-- fix board grid to have positive offset numbers
+- Fix board grid to have positive offset numbers
 
 Later:
 - Make mobile work
