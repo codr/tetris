@@ -7,7 +7,7 @@ describe('GameService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [MatDialogModule],
-      providers: [GameService]
+      providers: [GameService],
     });
   });
 

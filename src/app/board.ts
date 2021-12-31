@@ -40,15 +40,15 @@ export class Board {
   }
 
   private overlay(piece: Piece, offsetColumn: number, offsetRow: number): Square[][] {
-    return this.squares.map((row, y) =>
-      row.map((square, x) =>
-        piece.getSquareAt(x + offsetColumn, y + offsetRow) || square
-      )
-    );
+    return this.squares.map((row, y) => {
+      return row.map((square, x) => {
+        return piece.getSquareAt(x + offsetColumn, y + offsetRow) || square;
+      });
+    });
   }
 
   private static generateBoard(numberOfRows = NUMBER_ROWS) {
-    return Array.from({length: numberOfRows}, Board.generateRow)
+    return Array.from({length: numberOfRows}, Board.generateRow);
   }
 
   private static generateRow() {

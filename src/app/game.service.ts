@@ -58,19 +58,22 @@ export class GameService {
   }
 
   moveRight() {
-    if (this.canPlaveActivePiece(this.offsetColumn-1, this.offsetRow)) {
+    if (this.canPlaveActivePiece(this.offsetColumn - 1, this.offsetRow)) {
       this.offsetColumn--;
     }
   }
 
   moveLeft() {
-    if (this.canPlaveActivePiece(this.offsetColumn+1, this.offsetRow)) {
+    if (this.canPlaveActivePiece(this.offsetColumn + 1, this.offsetRow)) {
       this.offsetColumn++;
     }
   }
 
   moveDown() {
-    if (this.canPlaveActivePiece(this.offsetColumn, this.offsetRow-1)){
+    if (!this.canPlaceActivePiece()) {
+      return;
+    }
+    if (this.canPlaveActivePiece(this.offsetColumn, this.offsetRow - 1)) {
       this.offsetRow--;
     } else {
       this.placePiece();

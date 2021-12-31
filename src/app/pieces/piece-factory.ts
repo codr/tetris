@@ -16,7 +16,7 @@ const typeToPiece = {
   [PieceType.S]: PieceS,
   [PieceType.T]: PieceT,
   [PieceType.Z]: PieceZ,
-}
+};
 
 export class PieceFactory {
 
@@ -26,8 +26,8 @@ export class PieceFactory {
   }
 
   static randomType(): PieceType {
-    let keys = Object.keys(PieceType);
-    let size = keys.length / 2;
+    const keys = Object.keys(PieceType);
+    const size = keys.length / 2;
     return Math.floor(Math.random() * size);
   }
 

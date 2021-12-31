@@ -7,9 +7,9 @@ export class Util {
   }
 
   static transpose<T>(arr: Array<Array<T>>) {
-    return arr[0].map((col, i) =>
-      arr.map(row => row[i])
-    )
+    return arr[0].map((col, i) => {
+      return arr.map(row => row[i]);
+    });
   }
 
   static reveseRows<T>(arr: Array<T>) {

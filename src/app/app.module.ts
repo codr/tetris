@@ -30,6 +30,6 @@ import { GameOverDialogComponent } from './game-over-dialog/game-over-dialog.com
     MatDialogModule,
   ],
   providers: [GameService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

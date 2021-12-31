@@ -14,7 +14,7 @@ const COLOR_MAP = {
 };
 
 @Pipe({
-  name: 'color'
+  name: 'color',
 })
 export class ColorPipe implements PipeTransform {
 

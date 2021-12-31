@@ -1,14 +1,13 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 import { GameService } from '../game.service';
-import { Square } from '../square';
 
 @Component({
   selector: 'stage',
   templateUrl: './stage.component.html',
-  styleUrls: ['./stage.component.css']
+  styleUrls: ['./stage.component.css'],
 })
-export class StageComponent implements OnInit {
+export class StageComponent {
 
   constructor(private gameService: GameService) { }
 
@@ -47,9 +46,6 @@ export class StageComponent implements OnInit {
         this.gameService.moveDown();
         break;
     }
-  }
-
-  ngOnInit() {
   }
 
 }

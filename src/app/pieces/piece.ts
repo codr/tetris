@@ -13,11 +13,7 @@ export abstract class Piece {
   }
 
   draw(): Array<Array<Square>> {
-    return this.layer.map(row =>
-      row.map( b =>
-        new Square(b ? this : null)
-      )
-    );
+    return this.layer.map(row => row.map(b => new Square(b ? this : null)));
   }
 
   countSquares(): number {
@@ -29,7 +25,7 @@ export abstract class Piece {
   }
 
   getSquareAt(x: number, y: number): Square|null {
-    return this.isOccupiedAt(x,y) ? new Square(this) : null;
+    return this.isOccupiedAt(x, y) ? new Square(this) : null;
   }
 
 }
