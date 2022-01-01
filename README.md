@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/codr/tetris.svg?branch=master)](https://travis-ci.org/codr/tetris)
+[![Build and Deploy](https://github.com/codr/tetris/actions/workflows/main.yaml/badge.svg)](https://github.com/codr/tetris/actions/workflows/main.yaml)
+[![Tests](https://github.com/codr/tetris/actions/workflows/test.yml/badge.svg)](https://github.com/codr/tetris/actions/workflows/test.yml)
 
 [Demo](https://codr.github.io/tetris)
 
