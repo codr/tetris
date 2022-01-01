@@ -22,5 +22,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        npm install --silent
+        npm ci
         npx ng deploy --base-href=/tetris/ --name="Buildbot" --email="cody.cg+buildbot@gmail.com" --no-silent
