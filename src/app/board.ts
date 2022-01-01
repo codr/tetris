@@ -3,7 +3,7 @@ import {Square} from './square';
 import {Util} from './util';
 
 export const NUMBER_ROWS = 20;
-export const NUMBER_COLS = 12;
+export const NUMBER_COLS = 10;
 
 export class Board {
 

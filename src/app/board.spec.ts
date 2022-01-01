@@ -1,4 +1,5 @@
 import { Board } from './board';
+import {PieceI} from './pieces/piece-i';
 import {PieceJ} from './pieces/piece-j';
 import { Square } from './square';
 
@@ -8,7 +9,7 @@ describe('Board', () => {
 
     expect(squares).toBeTruthy();
     expect(squares.length).toBe(20);
-    expect(squares[0].length).toBe(12);
+    expect(squares[0].length).toBe(10);
   });
 
   it('fills the board with null', () => {
@@ -25,7 +26,8 @@ describe('Board', () => {
     board.place(piece, 0, -18);
     board.place(piece, -3, -18);
     board.place(piece, -6, -18);
-    board.place(piece, -9, -18);
+
+    board.place(new PieceI(), -8, -16);
 
     board.removeCompleteRows();
 
@@ -41,8 +43,6 @@ describe('Board', () => {
       jasmine.objectContaining({isOccupied: false}),
       jasmine.objectContaining({isOccupied: false}),
       jasmine.objectContaining({isOccupied: true}),
-      jasmine.objectContaining({isOccupied: false}),
-      jasmine.objectContaining({isOccupied: false}),
     ]);
   });
 });
